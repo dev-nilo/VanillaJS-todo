@@ -21,4 +21,5 @@ A simple and intuitive task management app that leverages the browser's local st
 1. **Clone this repository:**
 
    ```bash
-   git clone https://github.com/yourusername/your-repo-name.git
+   git clone https://github.com/dev-nilo/VanillaJS-todo.git
+   ```
