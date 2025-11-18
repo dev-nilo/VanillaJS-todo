@@ -5,6 +5,23 @@
   box-sizing: border-box;
 }
 
+/* 1. Uso de Variáveis CSS para Manutenção */
+:root {
+  /* Cores */
+  --bg-dark: #333;
+  --bg-medium: #444;
+  --bg-light: #555;
+  --text-primary: #f9f9f9;
+  --text-secondary: #333;
+  --color-success: #4caf50;
+  --color-danger: #ff6b6b;
+  --color-completed: #3a4b3a;
+
+  /* Outros */
+  --border-radius-base: 8px;
+  --spacing-unit: 1rem;
+}
+
 /* Body styles */
 body,
 input,
@@ -13,81 +30,169 @@ button {
 }
 
 body {
-  background-color: #333;
-  color: #f9f9f9;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
 }
 
+/* Container Responsivo */
 .container {
+  padding: 2rem;
   max-width: 1200px;
-
   display: flex;
   flex-direction: column;
   gap: 2rem;
-
   margin: 0 auto;
-  padding: 4rem;
 }
 
 /* Header styles */
 header {
-  background-color: #444;
+  background-color: var(--bg-medium);
   text-align: center;
-
   padding: 2rem;
-  border-radius: 8px;
+  border-radius: var(--border-radius-base);
 }
 
+/* Contador de Pendentes */
+#pendingCount {
+  font-weight: bold;
+  color: var(--color-success);
+  font-size: 1.1rem;
+}
+
+/* Estilos para o Foco (Acessibilidade) */
+input:focus-visible,
+button:focus-visible,
+.delete-btn:focus-visible {
+  outline: 2px solid var(--color-success);
+  outline-offset: 2px;
+}
+
+/* --- Formulário e Inputs --- */
+
+.search-container {
+  margin-bottom: var(--spacing-unit);
+}
+
+#searchTaskInput,
+.text-value input {
+  width: 100%;
+  padding: var(--spacing-unit);
+  border-radius: var(--border-radius-base);
+  border: none;
+  outline: none;
+  color: var(--text-secondary);
+  transition: border 0.3s;
+}
+
+#searchTaskInput:focus-visible,
+.text-value input:focus-visible {
+  border: 2px solid var(--color-success); /* Borda adicional para melhor foco visual */
+}
+
+/* Formulário de Adição */
 form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-
-  .text-value {
-    display: flex;
-    gap: 1rem;
-
-    input {
-      flex: 1;
-      padding: 1rem;
-      border-radius: 8px;
-      border: none;
-      outline: none;
-    }
-
-    button {
-      padding: 1rem 2rem;
-      border-radius: 8px;
-      border: none;
-      background-color: #555;
-      color: #f9f9f9;
-      cursor: pointer;
-
-      transition: background-color 0.3s;
-    }
-  }
-
-  button:hover {
-    background-color: #666;
-  }
+  gap: var(--spacing-unit);
 }
+
+.text-value {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-unit);
+}
+
+.text-value button {
+  flex-shrink: 0;
+  display: flex; /* Adicionado para centralizar ícone/texto */
+  align-items: center;
+  gap: 0.5rem; /* Espaço entre ícone e texto */
+  padding: var(--spacing-unit) 2rem;
+  border-radius: var(--border-radius-base);
+  border: none;
+  background-color: var(--bg-light);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.text-value button:hover {
+  background-color: #666;
+}
+
+/* --- Lista de Tarefas (UL/LI) --- */
 
 ul {
   list-style: none;
+}
 
-  li {
-    background-color: #444;
-    padding: 1rem;
-    border-radius: 8px;
-    margin-bottom: 1rem;
+ul li {
+  background-color: var(--bg-medium);
+  padding: var(--spacing-unit);
+  border-radius: var(--border-radius-base);
+  margin-bottom: var(--spacing-unit);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  transition: background-color 0.3s;
+}
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* Texto da Tarefa (P) */
+ul li p {
+  flex: 1;
+  cursor: pointer;
+  padding-right: var(--spacing-unit);
+  /* 2. Adiciona Foco visual ao <p> quando clicado ou focado (se navegável por teclado) */
+  outline-offset: -2px;
+}
+
+/* Estilo para Tarefas Concluídas */
+ul li.completed {
+  background-color: var(--color-completed);
+  opacity: 0.8;
+}
+
+ul li.completed p {
+  text-decoration: line-through;
+  color: #ccc;
+}
+
+/* Estilo para Ícones (Lixeira) */
+ul li i.delete-btn {
+  font-size: 1.25rem;
+  display: block;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  user-select: none;
+  transition: color 0.2s ease-in-out;
+  /* Garante que o ícone é acessível por teclado */
+  tab-index: 0;
+}
+
+ul li i.delete-btn:hover {
+  color: var(--color-danger);
+}
+
+/* Media Query para Telas Maiores */
+@media (min-width: 600px) {
+  .container {
+    padding: 4rem;
   }
 
-  img {
-    width: 1.25rem;
-    height: 1.25rem;
-    cursor: pointer;
+  .text-value {
+    flex-wrap: nowrap;
   }
+}
+
+/* Classe de acessibilidade (oculta visualmente) */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
