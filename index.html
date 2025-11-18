@@ -19,33 +19,31 @@
       rel="stylesheet"
     />
 
-    <title>Lista de Tarefas (To-Do List)</title>
+    <title>To Do</title>
   </head>
   <body>
     <div class="container">
       <header>
-        <h1>Lista de Tarefas</h1>
+        <h1>To Do</h1>
       </header>
 
       <p>
-        Pendentes:
+        Pending:
         <span id="pendingCount" aria-live="polite" aria-atomic="true">0</span>
       </p>
 
       <form id="taskForm">
-        <label for="taskInput" class="visually-hidden"
-          >Digite uma nova tarefa</label
-        >
+        <label for="taskInput" class="visually-hidden">ype a new task</label>
         <div class="text-value">
           <input
             type="text"
             id="taskInput"
-            placeholder="Eu preciso..."
+            placeholder="I need..."
             autocomplete="off"
             required
           />
           <button type="submit">
-            <i class="fa-solid fa-plus" aria-hidden="true"></i> Adicionar
+            <i class="fa-solid fa-plus" aria-hidden="true"></i> Add
           </button>
         </div>
       </form>
@@ -54,7 +52,7 @@
         <input
           type="text"
           id="searchTaskInput"
-          placeholder="Pesquisar tarefas..."
+          placeholder="Search task"
           autocomplete="off"
         />
       </div>
